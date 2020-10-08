@@ -8,6 +8,7 @@ services:
     ports:
       - 80:80
     tty: true
+    restart: always
     depends_on:
       - web
 
@@ -37,9 +38,32 @@ services:
     environment:
       LANG: 'ja_JP.UTF-8'
       TZ: 'Asia/Tokyo'
+      LOG_CHANNEL: 'stderr'
+      DB_CONNECTION: 'pgsql'
+      DB_HOST: 'db'
+      DB_PORT: '5432'
+      DB_DATABASE: 'laravel_development'
+      DB_USERNAME: 'docker'
+      DB_PASSWORD: 'docker'
     volumes:
       - ./api:/app
     expose:
       - 9000
     tty: true
     restart: always
+
+  db:
+    image: postgres:12
+    container_name: db
+    environment:
+      TZ: 'Asia/Tokyo'
+      POSTGRES_USER: 'docker'
+      POSTGRES_PASSWORD: 'docker'
+      POSTGRES_DB: 'laravel_development'
+    volumes:
+      - db:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+
+volumes:
+  db:

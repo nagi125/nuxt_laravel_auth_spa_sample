@@ -53,6 +53,8 @@ services:
       - 9000
     tty: true
     restart: always
+    depends_on:
+      - db
 
   db:
     image: postgres:12

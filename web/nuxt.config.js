@@ -52,7 +52,7 @@ export default {
       local: {
         endpoints: {
           login: { url: '/api/auth/login', method: 'post', propertyName: false },
-          user: { url: '/api/users', method: 'get', propertyName: false },
+          user: { url: '/api/user', method: 'get', propertyName: false },
           logout: false
         },
         tokenRequired: false,
@@ -61,7 +61,9 @@ export default {
     },
     localStorage: false,
   },
-
+  router: {
+    middleware: ['auth']
+  },
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
   }

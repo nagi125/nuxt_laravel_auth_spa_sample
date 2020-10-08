@@ -30,6 +30,9 @@
         },
       };
     },
+    mounted() {
+      this.$axios.get('/sanctum/csrf-cookie');
+    },
     methods: {
       async login() {
         try {

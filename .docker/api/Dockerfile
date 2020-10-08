@@ -5,10 +5,10 @@ ENV COMPOSER_ALLOW_SUPERUSER 1
 
 # install Lib
 RUN apk update && \
-    apk add --no-cache --virtual .php-builds oniguruma-dev git zip unzip
+    apk add --no-cache --virtual .php-builds oniguruma-dev postgresql-dev git zip unzip
 
 # add php,apache-module
-RUN docker-php-ext-install mbstring && \
+RUN docker-php-ext-install mbstring pdo pdo_pgsql && \
     docker-php-ext-enable mbstring
 
 # php.conf php-fpm.conf

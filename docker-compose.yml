@@ -1,0 +1,45 @@
+version: '3'
+services:
+  nginx:
+    container_name: nginx
+    build:
+      context: ./.docker/nginx
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+    tty: true
+    depends_on:
+      - web
+
+  web:
+    container_name: web
+    build:
+      context: ./.docker/web
+      dockerfile: Dockerfile
+    environment:
+      PORT: '3000'
+      HOST: '0.0.0.0'
+    expose:
+      - 3000
+    volumes:
+      - ./web:/app
+    stdin_open: true
+    tty: true
+    restart: always
+    depends_on:
+      - api
+
+  api:
+    container_name: api
+    build:
+      context: ./.docker/api
+      dockerfile: Dockerfile
+    environment:
+      LANG: 'ja_JP.UTF-8'
+      TZ: 'Asia/Tokyo'
+    volumes:
+      - ./api:/app
+    expose:
+      - 9000
+    tty: true
+    restart: always

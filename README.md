@@ -1,5 +1,5 @@
 ## 概要
-Nuxt + LaravelのSPA認証サンプルです。
+Nuxt(v2.14.x) + Laravel8.x(Sanctum利用)のSPA認証サンプルです。
 
 ### 関係図
 ![structure](./.doc/images/spa_dev_template.png)
@@ -22,6 +22,7 @@ $ docker-compose exec web yarn dev
 $ docker-compose exec api composer install
 $ docker-compose exec api cp .env.example .env
 $ docker-compose exec api php artisan key:generate 
+$ docker-compose exec api php artisan migrate:refresh --seed
 ```
 ## 開発用コマンド
 ### コンテナ準備

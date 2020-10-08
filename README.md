@@ -1,45 +1,35 @@
 ## 概要
-Nuxt + Laravel(Lumen)の開発環境構築テンプレートです。
+Nuxt + LaravelのSPA認証サンプルです。
 
 ### 関係図
 ![structure](./.doc/images/spa_dev_template.png)
 
-## 開発環境立ち上げ
+## 初期設定
+### コンテナ準備
 ```
 $ docker-compose up
 ```
 
-## Frontend
-下記のコマンドでNuxtプロジェクトを作成します。
-./frontendというディレクトリにNuxtプロジェクトが一式準備されます。
-
-### 1. プロジェクトの作成
-```
-$ docker-compose exec frontend yarn create nuxt-app ./
-```
-
-### 2. 監視
+### Web
 下記コマンドで常時ビルドするようにします。
 ```
-$ docker-compose exec frontend yarn dev
+$ docker-compose exec web yarn install
+$ docker-compose exec web yarn dev
 ```
 
-## Backend
-下記のコマンドでLumenプロジェクトを作成します。
-※ Laravelもほぼ同じなので省略します。
-
-### 1. 仮プロジェクトの作成
-※ 直下はファイルが存在しているため不可能
+### Api
 ```
-$ docker-compose exec api composer create-project --prefer-dist laravel/laravel blog
+$ docker-compose exec api composer install
+$ docker-compose exec api cp .env.example .env
+$ docker-compose exec api php artisan key:generate 
 ```
-
-### 2. 作成した仮プロジェクトを直下にコピー
+## 開発用コマンド
+### コンテナ準備
 ```
-$ docker-compose exec api cp -fR ./blog/. ./
+$ docker-compose up
 ```
 
-### 3. 仮プロジェクトを削除
+### Frontend準備
 ```
-$ docker-compose exec api rm -rf ./blog
+$ docker-compose exec web yarn dev
 ```

@@ -45,6 +45,8 @@ services:
       DB_DATABASE: 'laravel_development'
       DB_USERNAME: 'docker'
       DB_PASSWORD: 'docker'
+      SESSION_DOMAIN: 'localhost'
+      SANCTUM_STATEFUL_DOMAINS: 'localhost'
     volumes:
       - ./api:/app
     expose:
